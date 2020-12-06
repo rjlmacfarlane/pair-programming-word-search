@@ -1,27 +1,27 @@
+// Refactor & DRY in PP with Sam Pavlic
+
+let _ = require('lodash');
+
 const wordSearch = (letters, word) => {
-  const horizontalJoin = letters.map(ls => ls.join(''));
-  for (let line of horizontalJoin) {
-    if (line.includes(word)) return true;
+  const horizontal = letters.map(ls => ls.join(''));
+  if (looper(horizontal, word) === true) {
+    return true;
   }
-  const vertical = transpose(letters);
-  const verticalJoin = vertical.map(ls => ls.join(''));
-  for (let line of verticalJoin) {
-    if (line.includes(word)) return true;
+  const vertical = transpose(letters).map(ls => ls.join(''));
+  if (looper(vertical, word) === true) {
+    return true;
   }
   return false;
 };
 
-const transpose = function(matrix) {
-  let result = [];
-  for (let i = 0; i < matrix[0].length; i++) {
-    result.push([]);
+const looper = function(array, word) {
+  for (let line of array) {
+    if (line.includes(word)) return true;
   }
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix[i].length; j++) {
-      result[j].push(matrix[i][j]);
-    }
-  }
-  return result;
+};
+
+const transpose = (matrix) => {
+  return _.zip(...matrix);
 };
 
 module.exports = wordSearch;
