@@ -14,7 +14,7 @@ const wordSearch = (letters, word) => {
   return false;
 };
 
-const looper = function(array, word) {
+const looper = (array, word) => {
   for (let line of array) {
     if (line.includes(word)) return true;
   }
